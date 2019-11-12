@@ -1,0 +1,14 @@
+---
+
+- hosts: all
+  vars:
+    home_dir: "/home/vitor"
+  roles:
+    - check_deps
+    - clone_repo
+    - python_configs
+    - role: gunicorn_serve
+      vars:
+        application_port: 8888
+        user_name: vitor
+        group_name: vitor

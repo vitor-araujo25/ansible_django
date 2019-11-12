@@ -1,0 +1,14 @@
+[Unit]
+Description=Gunicorn wsgi server
+
+[Service]
+User={{ user_name }}
+Group={{ group_name }}
+PIDFile={{ home_dir }}/gunicorn.pid
+Restart=always
+WorkingDirectory={{ home_dir }}/project
+Type=simple
+ExecStart={{ home_dir }}/.venv/bin/gunicorn siteconfig.wsgi:application -b 0.0.0.0:{{ application_port }} -w 1 -t 80 -n django_example -p {{ home_dir }}/gunicorn.pid
+ExecReload = /bin/kill -s HUP $MAINPID
+ExecStop = /bin/kill -s TERM $MAINPID
+

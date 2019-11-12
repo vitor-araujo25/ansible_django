@@ -1,0 +1,7 @@
+---
+- name: Install Python3 dependency management tools
+  apt:
+    name: python-virtualenv
+    state: present
+    force_apt_get: yes
+  become: yes

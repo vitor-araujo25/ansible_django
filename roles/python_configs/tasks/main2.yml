@@ -1,0 +1,20 @@
+---
+- name: Install pip dependencies
+  pip:
+    chdir: "{{ home_dir }}/project"
+    requirements: "requirements.txt"
+    virtualenv: "{{ home_dir }}/.venv"
+    virtualenv_python: python3
+    state: present
+
+- name: Run collectstatic
+  shell: "source ~/.venv/bin/activate && ./manage.py collectstatic --noinput"
+  args:
+    chdir: "{{ home_dir }}/project"
+    executable: "/bin/bash"
+
+- name: Run migrate
+  shell: "source ~/.venv/bin/activate && ./manage.py migrate --noinput"
+  args:
+    chdir: "{{ home_dir }}/project"
+    executable: "/bin/bash"

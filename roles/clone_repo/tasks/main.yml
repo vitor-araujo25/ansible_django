@@ -1,0 +1,7 @@
+---
+- name: Clone project
+  git:
+    repo: "{{ repository }}"
+    dest: "{{ home_dir }}/project"
+    force: yes
+    version: master
